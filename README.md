@@ -38,6 +38,7 @@ Add the following line at the end of the Cron file:
 Now, we're done with installing and configuring Keye.
 
 ## Usage
+> $ python keye.py -h
 
 Short Form    | Long Form     | Description
 ------------- | ------------- |-------------
