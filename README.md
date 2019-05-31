@@ -33,7 +33,7 @@ Now, we need to add a new Cron job to schedule execution of Keye at given time. 
 > $ crontab -e
 
 Add the following line at the end of the Cron file:
-`0 */12 * * * /usr/bin/python /root/Keye/keye.py`
+`0 */12 * * * cd /root/Keye/ && /usr/bin/python /root/Keye/keye.py`
 
 Now, we're done with installing and configuring Keye.
 
