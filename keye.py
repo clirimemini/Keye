@@ -52,6 +52,7 @@ def request(url):
             url = url.replace("http://", "https://")
             contentlength = requests.get(url, allow_redirects=True, timeout=5).headers['content-length']
             committodb(url, contentlength)
+            print("We have successfully added the URL to be monitored.")
         except Exception as e:
             print("We could not connect to {} due to following error: {}".format(url, e))
 
