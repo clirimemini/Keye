@@ -84,12 +84,8 @@ def connect(id, url, contentlength):
             notify(url)
             cursor.execute('''UPDATE urls SET contentlength = ? WHERE id = ? ''', (newcontentlength, id))
             db.commit()
-    except requests.ConnectionError:
-        print("Could not connect to the target host!")
-    except KeyError:
-        pass
-    except requests.exceptions.ReadTimeout:
-        pass
+    except Exception as e:
+        print("We could not connect to {} due to following error: {}".format(url, e))
 
 def removefromdb():
     urltoremove = args.urltoremove
