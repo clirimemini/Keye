@@ -26,9 +26,6 @@ You will obtain a link in the following format:
 
 Copy that link and edit `slackconfig.py`
 
-Next, we need to create a sqlite3 database, with 1 table and 3 columns, we can do this by running the following command:
-> $ python setup.py
-
 Now, we need to add a new Cron job to schedule execution of Keye at given time. To do it, type:
 > $ crontab -e
 
