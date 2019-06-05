@@ -1,5 +1,5 @@
 ## What is Keye?
-Keye is a reconnaissance tool that was written in Python with SQLite3 integrated. After adding a list of urls, it will make a request to these urls and it will try to detect changes on these urls based on their Content-Length. This tool is supposed to be scheduled to run periodically at fixed times, dates, or intervals (Ideally each day). Recognized changes of urls will be sent to Slack workspace with a notification push.
+Keye is a reconnaissance tool that was written in Python with SQLite3 integrated. After adding a list of URLs, it will make a request to these URLs and try to detect changes based on their response content length. This tool is supposed to be scheduled to run periodically at fixed times, dates, or intervals (Ideally each day). Recognized changes of URLs will be sent to Slack workspace with a notification push.
 
 ## Requirements
 - Virtual Private Server (VPS) running on Unix.
@@ -10,7 +10,7 @@ Keye is a reconnaissance tool that was written in Python with SQLite3 integrated
 First of all, you will have to clone the tool from Github to your server:
 > $ git clone https://github.com/clirimemini/Keye.git && cd Keye
 
-Next step is to create a Slack workspace, to where new recognized changes of urls will be sent to. Just browse to [https://slack.com/](https://slack.com/) and create a free account.
+Next step is to create a Slack workspace, to where new recognized changes of URLs will be sent to. Just browse to [https://slack.com/](https://slack.com/) and create a free account.
 
 Then, create a channel on your workspace.
 
@@ -40,9 +40,9 @@ Now, we're done with installing and configuring Keye.
 
 Short Form    | Long Form     | Description
 ------------- | ------------- |-------------
--s            | --singleurl       | Single url to add. E.g: http://google.com
--ul           | --urlslist      | File with new urls to add. E.g: urls.txt
--rm           | --remove       | Url to remove from database. E.g: http://google.com
+-s            | --singleurl       | Single URL to add. E.g: http://google.com
+-ul           | --urlslist      | File with new URLs to add. E.g: urls.txt
+-rm           | --remove       | URL to remove from database. E.g: http://google.com
 
 ## Feedback and issues?
 If you have any feedback, anything that you want to see implemented or if you're running into issues using Keye, please feel free to file an issue on [https://github.com/clirimemini/Keye/issues](https://github.com/clirimemini/Keye/issues)
