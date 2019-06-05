@@ -49,6 +49,12 @@ def request(url):
 
     except requests.ConnectionError:
         print("We could not connect to: " + url)
+        try:
+            url = url.replace("https://", "http://")
+            contentlength = requests.get(url, allow_redirects=True, timeout=5).headers['content-length']
+            committodb(url, contentlength
+        except Exception as e:
+            print("test: {}".format(e))
     except requests.exceptions.ReadTimeout:
         pass
     except requests.exceptions.InvalidURL:
