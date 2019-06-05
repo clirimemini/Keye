@@ -12,6 +12,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-s', '--singleurl', help='Single URL to add. E.g: http://google.com', dest='singleurl')
 parser.add_argument('-ul', '--urlslist', help='File with new urls to add. E.g: urls.txt', dest='urlslist')
 parser.add_argument('-rm', '--remove', help='URL to remove from database. E.g: http://google.com', dest='urltoremove')
+parser.add_argument('-d', '--display', help='Display all monitored URLs', required =  False, nargs='?', const="True", dest='displayurls')
 args = parser.parse_args()
 
 def db_install():
@@ -97,6 +98,16 @@ def removefromdb():
     except Exception as e:
         print(e)
 
+def displayurls():
+    try:
+        cursor.execute('''SELECT url from urls''')
+        all_rows = cursor.fetchall()
+        for row in all_rows:
+            print(row[0])
+    except Exception as e:
+        print("We couldn't retrieve URLs due to following error {}".format(e))
+
+
 def notify(url):
     webhook_url = posting_webhook
     slack_data = {'text': 'Changes detected on: ' + url}
@@ -112,6 +123,8 @@ elif args.urlslist:
     addurlsfromlist()
 elif args.urltoremove:
     removefromdb()
+elif args.displayurls:
+    displayurls()
 else:
     getfromdb()
 
