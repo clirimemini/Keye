@@ -47,6 +47,7 @@ Short Form    | Long Form     | Description
 -s            | --singleurl       | Single URL to add. E.g: http://google.com
 -ul           | --urlslist      | File with new URLs to add. E.g: urls.txt
 -rm           | --remove       | URL to remove from database. E.g: http://google.com
+-d           | --display       | Display all monitored URLs.
 
 ## Feedback and issues?
 If you have any feedback, anything that you want to see implemented or if you're running into issues using Keye, please feel free to file an issue on [https://github.com/clirimemini/Keye/issues](https://github.com/clirimemini/Keye/issues)
