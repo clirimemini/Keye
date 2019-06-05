@@ -45,22 +45,15 @@ def request(url):
             committodb(url, contentlength)
             print("We have successfully added the URL to be monitored.")
         except Exception as e:
-            print("test: {}".format(e))
+            print(e)
 
-    except requests.ConnectionError:
-        print("We could not connect to: " + url)
+    except:
         try:
-            url = url.replace("https://", "http://")
+            url = url.replace("http://", "https://")
             contentlength = requests.get(url, allow_redirects=True, timeout=5).headers['content-length']
             committodb(url, contentlength)
         except Exception as e:
-            print("test: {}".format(e))
-    except requests.exceptions.ReadTimeout:
-        pass
-    except requests.exceptions.InvalidURL:
-        pass
-    except KeyError:
-        pass
+            print("We could not connect to {} due to following error: {}".format(url, e))
 
 def committodb(url, contentlength):
     try:
