@@ -52,7 +52,7 @@ def request(url):
         try:
             url = url.replace("https://", "http://")
             contentlength = requests.get(url, allow_redirects=True, timeout=5).headers['content-length']
-            committodb(url, contentlength
+            committodb(url, contentlength)
         except Exception as e:
             print("test: {}".format(e))
     except requests.exceptions.ReadTimeout:
