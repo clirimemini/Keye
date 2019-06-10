@@ -13,7 +13,7 @@ First of all, you will have to clone the tool from Github to your server:
 
 Install the dependencies:
 
->$ python install -r requirements.txt (Or python3 install -r requirements.txt)
+>$ pip install -r requirements.txt (or pip3 install -r requirements.txt)
 
 Next step is to create a Slack workspace, to where new recognized changes of URLs will be sent to. Just browse to [https://slack.com/](https://slack.com/) and create a free account.
 
