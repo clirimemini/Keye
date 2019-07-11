@@ -21,7 +21,7 @@ def db_install():
         cursor = db.cursor()
         cursor.execute('''
             CREATE TABLE urls(id INTEGER PRIMARY KEY, url TEXT,
-                               contentlength INTEGER)''')
+                               reslength INTEGER)''')
         db.commit()
         db.close()
     else:
@@ -41,50 +41,60 @@ def request(url):
     try:
         if not "http" in url:
             url = "http://" + url
-        contentlength = requests.get(url, allow_redirects=True, verify=False, timeout=5).headers['content-length']
+        req = requests.get(url, allow_redirects=True, verify=False, timeout=5)
+        reslength = len(req.text)
         try:
-            committodb(url, contentlength)
-            print("We have successfully added the URL to be monitored.")
+            if not check_if_present(url):
+                committodb(url, reslength)
+                print("We have successfully added the URL to be monitored.")
+            else:
+                print("This URL already exists on the database.")
         except Exception as e:
             print(e)
 
     except:
         try:
             url = url.replace("http://", "https://")
-            contentlength = requests.get(url, allow_redirects=True, timeout=5).headers['content-length']
-            committodb(url, contentlength)
+            req = requests.get(url, allow_redirects=True, timeout=5)
+            reslength = len(req.text)
+            if not check_if_present(url):
+                committodb(url, reslength)
+                print("We have successfully added the URL to be monitored.")
+            else:
+                print("This URL already exists on the database.")
             print("We have successfully added the URL to be monitored.")
         except Exception as e:
             print("We could not connect to {} due to following error: {}".format(url, e))
 
-def committodb(url, contentlength):
+def committodb(url, reslength):
     try:
-        cursor.execute('''INSERT INTO urls(url, contentlength)
-                          VALUES(?,?)''', (url, contentlength))
+        cursor.execute('''INSERT INTO urls(url, reslength)
+                          VALUES(?,?)''', (url, reslength))
         db.commit()
     except Exception as e:
         print(e)
 
 def getfromdb():
     try:
-        cursor.execute('''SELECT id, url, contentlength FROM urls''')
+        cursor.execute('''SELECT id, url, reslength FROM urls''')
         all_rows = cursor.fetchall()
         for row in all_rows:
             id = row[0]
             url = row[1]
-            contentlength = str(row[2])
-            connect(id, url, contentlength)
+            reslength = str(row[2])
+            connect(id, url, reslength)
     except Exception as e:
         print(e)
 
-def connect(id, url, contentlength):
+def connect(id, url, reslength):
     try:
-        newcontentlength = requests.get(url, allow_redirects=True, verify=False, timeout=5).headers['content-length']
-        if newcontentlength == contentlength:
+        req = requests.get(url, allow_redirects=True, verify=False, timeout=5)
+        newreslength = len(req.text)
+        if int(newreslength) == int(reslength):
             pass
         else:
             notify(url)
-            cursor.execute('''UPDATE urls SET contentlength = ? WHERE id = ? ''', (newcontentlength, id))
+            cursor.execute('''UPDATE urls SET reslength = ? WHERE id = ? ''', (newreslength, id))
             db.commit()
     except Exception as e:
         print("We could not connect to {} due to following error: {}".format(url, e))
@@ -106,6 +116,17 @@ def displayurls():
             print(row[0])
     except Exception as e:
         print("We couldn't retrieve URLs due to following error {}".format(e))
+
+
+def check_if_present(url):
+    try:
+        cursor.execute('''SELECT * from urls where url = ? ''',(url,))
+        if cursor.fetchall():
+            return True
+        else:
+            return False
+    except Exception as e:
+        return False
 
 
 def notify(url):
