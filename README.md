@@ -1,5 +1,5 @@
 ## What is Keye?
-Keye is a reconnaissance tool that was written in Python with SQLite3 integrated. After adding a list of URLs, it will make a request to these URLs and try to detect changes based on their response's content length. This tool is supposed to be scheduled to run periodically at fixed times, dates, or intervals (Ideally each day). Recognized changes of URLs will be sent to Slack workspace with a notification push.
+Keye is a reconnaissance tool that was written in Python with SQLite3 integrated. After adding a single URL, or a list of URLs, it will make a request to these URLs and try to detect changes based on their response's body length. This tool is supposed to be scheduled to run periodically at fixed times, dates, or intervals (Ideally each day). Recognized changes of URLs will be sent to Slack workspace with a notification push.
 
 #### Thanks to [Yassine Aboukir](https://twitter.com/Yassineaboukir) for his help and support on this project.
 ## Requirements
