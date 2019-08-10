@@ -5,7 +5,7 @@ Keye is a reconnaissance tool that was written in Python with SQLite3 integrated
 ## Requirements
 - Virtual Private Server (VPS) running on Unix.
 - Python 2.x or 3.x.
-- Free Slack workplace.
+- Free Slack workspace.
 
 ## Installation & Configuration
 First of all, you will have to clone the tool from Github to your server:
